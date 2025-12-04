@@ -1,0 +1,48 @@
+.alert {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 14px 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+  font-weight: 600;
+  z-index: 2000;
+  animation: slideIn 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.alert-success {
+  background: linear-gradient(135deg, #558b2f, #7cb342);
+}
+
+.alert-error {
+  background: linear-gradient(135deg, #b71c1c, #e53935);
+}
+
+.alert-warning {
+  background: linear-gradient(135deg, #ff8f00, #ffa726);
+}
+
+.alert-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 8px;
+}

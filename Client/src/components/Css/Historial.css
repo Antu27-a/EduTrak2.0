@@ -1,0 +1,216 @@
+.historial-page {
+    padding: 24px;
+}
+
+.historial-page .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.header-left {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.btn-back {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    color: #07454e;
+    transition: all 0.2s ease;
+}
+
+.btn-back:hover {
+    background: #07454e;
+    color: white;
+}
+
+.header-info h1 {
+    color: #07454e;
+    font-size: 28px;
+    margin: 0 0 8px 0;
+}
+
+.historial-page .curso-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.historial-page .curso-badge svg {
+    color: #ff8f00;
+}
+
+.historial-page .curso-badge>span:first-of-type {
+    font-size: 18px;
+    font-weight: 700;
+    color: #07454e;
+}
+
+.historial-page .turno-badge {
+    background: #07454e;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.btn-export {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #07454e, #0a5c68);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-export:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(7, 69, 78, 0.3);
+}
+
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.stat-card svg {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.stat-card.presentes svg {
+    background: #e8f5e9;
+    color: #558b2f;
+}
+
+.stat-card.ausentes svg {
+    background: #ffebee;
+    color: #b71c1c;
+}
+
+.stat-card.justificados svg {
+    background: #fff3e0;
+    color: #ff8f00;
+}
+
+.stat-value {
+    display: block;
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+}
+
+.stat-label {
+    font-size: 13px;
+    color: #666;
+}
+
+.filters-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.date-filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    padding: 10px 16px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.date-filter svg {
+    color: #07454e;
+}
+
+.date-filter input {
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: #333;
+}
+
+.table-section {
+    margin-bottom: 24px;
+}
+
+.fecha-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #666;
+}
+
+.fecha-cell svg {
+    color: #07454e;
+}
+
+.email-cell {
+    color: #666;
+}
+
+.estado-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.estado-tag.presente {
+    background: #e8f5e9;
+    color: #558b2f;
+}
+
+.estado-tag.ausente {
+    background: #ffebee;
+    color: #b71c1c;
+}
+
+.estado-tag.justificado {
+    background: #fff3e0;
+    color: #ff8f00;
+}
+
+@media (max-width: 768px) {
+    .filters-row {
+        flex-direction: column;
+    }
+
+    .date-filter {
+        width: 100%;
+    }
+}

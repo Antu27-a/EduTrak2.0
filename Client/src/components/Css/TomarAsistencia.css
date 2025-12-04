@@ -1,0 +1,297 @@
+.tomar-asistencia-page {
+    padding: 24px;
+}
+
+.tomar-asistencia-page .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.header-info h1 {
+    color: #07454e;
+    font-size: 28px;
+    margin: 0 0 12px 0;
+}
+
+.curso-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.curso-badge svg {
+    color: #ff8f00;
+}
+
+.curso-badge>span:first-of-type {
+    font-size: 20px;
+    font-weight: 700;
+    color: #07454e;
+}
+
+.turno-badge {
+    background: #07454e;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.alumnos-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #666;
+    font-size: 14px;
+}
+
+.header-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-historial {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #438791, #5aa3ad);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-historial:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(67, 135, 145, 0.3);
+}
+
+.fecha-banner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, #ff8f00, #ffa726);
+    color: white;
+    border-radius: 10px;
+    margin-bottom: 24px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.table-section {
+    margin-bottom: 24px;
+}
+
+/* Estilos para celdas de la tabla */
+.alumno-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.alumno-avatar {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #07454e, #0a5c68);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.fecha-cell,
+.email-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #666;
+}
+
+.fecha-cell svg,
+.email-cell svg {
+    color: #07454e;
+}
+
+/* Botones de estado */
+.estado-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.estado-btn {
+    width: 36px;
+    height: 36px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.estado-btn.presente {
+    color: #558b2f;
+}
+
+.estado-btn.presente:hover,
+.estado-btn.presente.active {
+    background: #558b2f;
+    border-color: #558b2f;
+    color: white;
+}
+
+.estado-btn.ausente {
+    color: #b71c1c;
+}
+
+.estado-btn.ausente:hover,
+.estado-btn.ausente.active {
+    background: #b71c1c;
+    border-color: #b71c1c;
+    color: white;
+}
+
+.estado-btn.justificado {
+    color: #ff8f00;
+}
+
+.estado-btn.justificado:hover,
+.estado-btn.justificado.active {
+    background: #ff8f00;
+    border-color: #ff8f00;
+    color: white;
+}
+
+/* Badge de faltas */
+.faltas-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    background: #e8f5e9;
+    color: #558b2f;
+}
+
+.faltas-badge.warning {
+    background: #fff3e0;
+    color: #ff8f00;
+}
+
+.faltas-badge.critical {
+    background: #ffebee;
+    color: #b71c1c;
+}
+
+/* Botón notificar */
+.btn-notificar {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 8px;
+    background: #ffebee;
+    color: #b71c1c;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.btn-notificar:hover {
+    background: #b71c1c;
+    color: white;
+}
+
+/* Footer con acciones */
+.actions-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.resumen {
+    display: flex;
+    gap: 20px;
+}
+
+.resumen-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.resumen-item.presentes {
+    color: #558b2f;
+}
+
+.resumen-item.ausentes {
+    color: #b71c1c;
+}
+
+.resumen-item.justificados {
+    color: #ff8f00;
+}
+
+/* Modal de notificación */
+.modal-notification p {
+    margin: 0 0 16px 0;
+    color: #333;
+}
+
+.alumno-detail {
+    background: #f5f7fa;
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.alumno-detail strong {
+    display: block;
+    color: #07454e;
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.alumno-detail span {
+    display: block;
+    color: #666;
+    font-size: 14px;
+}
+
+.faltas-info {
+    color: #b71c1c !important;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+    .actions-footer {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .resumen {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}

@@ -1,0 +1,17 @@
+.preceptor-layout {
+    display: flex;
+    min-height: 100vh;
+    background: #f5f7fa;
+}
+
+.preceptor-main {
+    flex: 1;
+    margin-left: 260px;
+    padding: 0;
+}
+
+@media (max-width: 768px) {
+    .preceptor-main {
+        margin-left: 0;
+    }
+}

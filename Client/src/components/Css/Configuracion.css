@@ -1,0 +1,407 @@
+.configuracion-container {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  /* columna para header arriba y tarjeta abajo */
+  gap: 20px;
+  align-items: center;
+  align-content: center;
+
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.configuracion-header {
+  align-self: flex-start;
+  margin-bottom: 10px;
+}
+
+.configuracion-header h1 {
+  font-size: 28px;
+  color: var(--primary);
+  margin-bottom: 5px;
+}
+
+.configuracion-header p {
+  color: #666;
+  font-size: 19px;
+}
+
+.configuracion-content {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.password-card {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.password-card .card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.password-card .card-header svg {
+  color: var(--primary);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.password-card .card-header h2 {
+  font-size: 18px;
+  color: var(--primary);
+  margin-bottom: 5px;
+}
+
+.password-card .card-header p {
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.password-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.password-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.password-form label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.password-form label svg {
+  color: var(--secondary);
+}
+
+.password-form .input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-form input {
+  width: 100%;
+  padding: 12px 45px 12px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.password-form input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(7, 69, 78, 0.1);
+}
+
+.password-form input::placeholder {
+  color: #aaa;
+}
+
+.toggle-password {
+  position: absolute;
+  bottom: 24px;
+  right: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #888;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
+}
+
+.toggle-password:hover {
+  color: var(--primary);
+}
+
+.password-form .hint {
+  font-size: 12px;
+  color: #888;
+  margin-top: -3px;
+}
+
+.save-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.save-btn:hover {
+  background: var(--secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(7, 69, 78, 0.3);
+}
+
+
+
+/* Agregando estilos para la página de configuración completa */
+
+.configuracion-page {
+  padding: 30px;
+}
+
+.configuracion-page .page-header {
+  margin-bottom: 30px;
+}
+
+.configuracion-page .page-header h1 {
+  font-size: 28px;
+  color: var(--primary);
+  margin-bottom: 5px;
+}
+
+.configuracion-page .page-header p {
+  color: #666;
+  font-size: 14px;
+}
+
+.config-container {
+  display: flex;
+  gap: 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.config-tabs {
+  display: flex;
+  flex-direction: column;
+  background: #f8f9fa;
+  padding: 20px;
+  min-width: 220px;
+  border-right: 1px solid #eee;
+}
+
+.config-tab {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.config-tab:hover {
+  background: white;
+  color: var(--primary);
+}
+
+.config-tab.active {
+  background: var(--primary);
+  color: white;
+}
+
+.config-content {
+  flex: 1;
+  padding: 30px;
+}
+
+.config-form h2 {
+  font-size: 20px;
+  color: var(--primary);
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.form-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 400px;
+  margin-bottom: 25px;
+}
+
+.toggle-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.toggle-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toggle-item:hover {
+  background: #f0f0f0;
+}
+
+.toggle-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.toggle-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+}
+
+.toggle-desc {
+  font-size: 13px;
+  color: #888;
+}
+
+.toggle-item input[type="checkbox"] {
+  width: 50px;
+  height: 26px;
+  appearance: none;
+  background: #ddd;
+  border-radius: 15px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toggle-item input[type="checkbox"]::before {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: white;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-item input[type="checkbox"]:checked {
+  background: var(--primary);
+}
+
+.toggle-item input[type="checkbox"]:checked::before {
+  left: 26px;
+}
+
+.theme-options {
+  display: flex;
+  gap: 20px;
+}
+
+.theme-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 30px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.theme-option:hover {
+  background: #f0f0f0;
+}
+
+.theme-option.selected {
+  border-color: var(--primary);
+  background: rgba(7, 69, 78, 0.05);
+}
+
+.theme-option input[type="radio"] {
+  display: none;
+}
+
+.theme-preview {
+  width: 80px;
+  height: 60px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.theme-preview.light {
+  background: linear-gradient(to bottom, #f8f9fa 30%, white 30%);
+}
+
+.theme-preview.dark {
+  background: linear-gradient(to bottom, #2d3748 30%, #1a202c 30%);
+}
+
+.theme-option span {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .config-container {
+    flex-direction: column;
+  }
+
+  .config-tabs {
+    flex-direction: row;
+    overflow-x: auto;
+    min-width: auto;
+    border-right: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  .config-tab {
+    white-space: nowrap;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-options {
+    flex-direction: column;
+  }
+}

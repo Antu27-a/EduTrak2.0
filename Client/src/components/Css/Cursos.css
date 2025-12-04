@@ -1,0 +1,253 @@
+:root {
+  --primary: #07454e;
+  --secondary: #438791;
+  --accent: #00796b;
+  --positive: #558b2f;
+  --negative: #b71c1c;
+  --warning: #ff8f00;
+  --bg-light: #f5f7fa;
+  --card-bg: #ffffff;
+  --text-dark: #333333;
+  --text-muted: #666666;
+  --border-color: #e0e0e0;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --radius: 12px;
+}
+
+.cursos-page {
+  padding: 24px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.page-header h1 {
+  color: var(--primary);
+  font-size: 28px;
+  margin: 0;
+}
+
+.cursos-container {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .cursos-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 24px;
+  background: linear-gradient(135deg, var(--warning), #ffa726);
+  color: white;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  margin-left: auto;
+}
+
+.form-card form {
+  padding: 24px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.input-icon {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  transition: border-color 0.2s;
+}
+
+.input-icon:focus-within {
+  border-color: var(--warning);
+}
+
+.input-icon svg {
+  color: var(--warning);
+}
+
+.input-icon input,
+.input-icon select {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 15px;
+  background: transparent;
+}
+
+.btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--warning), #ffa726);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 143, 0, 0.3);
+}
+
+.history-card .card-header {
+  background: var(--warning);
+}
+
+.history-list {
+  padding: 16px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-radius: 10px;
+  background: var(--bg-light);
+  margin-bottom: 12px;
+  transition: transform 0.2s;
+}
+
+.history-item:hover {
+  transform: translateX(4px);
+}
+
+.item-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.avatar-curso {
+  width: 45px;
+  height: 45px;
+  background: linear-gradient(135deg, var(--warning), #ffa726);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item-info h4 {
+  margin: 0 0 6px 0;
+  color: var(--text-dark);
+}
+
+.curso-details {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.turno-tag {
+  background: var(--warning);
+  color: white;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.alumnos-count {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.item-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-icon {
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-icon.edit {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.btn-icon.edit:hover {
+  background: #1976d2;
+  color: white;
+}
+
+.btn-icon.delete {
+  background: #ffebee;
+  color: var(--negative);
+}
+
+.btn-icon.delete:hover {
+  background: var(--negative);
+  color: white;
+}
+
+.empty-message {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 40px;
+}
+
+.warning-text {
+  color: var(--negative);
+  font-size: 14px;
+  margin-top: 8px;
+}

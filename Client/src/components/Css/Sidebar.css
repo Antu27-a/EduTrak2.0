@@ -1,0 +1,217 @@
+:root {
+  --bg: #ffffff;
+  --primary: #07454e;
+  --primary-dark: #053238;
+  --primary-light: #0a5c68;
+  --secondary: #438791;
+  --accent: #00796b;
+  --positive: #558b2f;
+  --negative: #b71c1c;
+  --warning: #ff8f00;
+  --text-light: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.7);
+  --sidebar-width: 260px;
+  --transition: 0.3s ease;
+}
+
+.sidebar {
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-header {
+  padding: 24px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-header {
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-img {
+  width: 40px;
+  /* tamaño pequeño y consistente */
+  height: 40px;
+  object-fit: contain;
+  /* mantiene proporciones */
+}
+
+.logo-text h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0;
+}
+
+.logo-text span {
+  font-size: 13px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 12px;
+}
+
+.sidebar-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 20px 12px;
+  overflow-y: auto;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  color: var(--bg);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 10px;
+  transition: var(--transition);
+  position: relative;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-light);
+  transform: translateX(4px);
+}
+
+.nav-link.active {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--text-light);
+}
+
+.nav-link.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 60%;
+  background: var(--warning);
+  border-radius: 0 4px 4px 0;
+}
+
+.nav-link svg {
+  flex-shrink: 0;
+}
+
+.sidebar-footer {
+  padding: 20px 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 14px 16px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-light);
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.logout-btn:hover {
+  background: var(--negative);
+  border-color: var(--negative);
+  color: var(--text-light);
+}
+
+/* Estilos para el modal de confirmación de cierre de sesión */
+.logout-modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.logout-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(255, 143, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.logout-icon svg {
+  color: var(--warning);
+}
+
+.logout-modal-content p {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 24px;
+}
+
+.logout-modal-actions {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  justify-content: center;
+}
+
+.logout-modal-actions .btn-cancel {
+  padding: 12px 24px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.logout-modal-actions .btn-cancel:hover {
+  background: #f5f5f5;
+  border-color: #ccc;
+}
+
+.logout-modal-actions .btn-logout-confirm {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--negative);
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.logout-modal-actions .btn-logout-confirm:hover {
+  background: #8b1515;
+}

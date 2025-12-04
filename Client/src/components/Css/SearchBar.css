@@ -1,0 +1,30 @@
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  width: 100%;    
+  max-width: none;    
+  box-sizing: border-box; 
+}
+
+.search-bar svg {
+  color: #07454e;
+  flex-shrink: 0; 
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  font-size: 17px;
+  width: 100%;     
+  color: #333;
+}
+.search-bar {
+  width: 100%;
+  max-width: 800px;   
+  margin: 0 auto;     
+}
