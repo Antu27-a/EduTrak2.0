@@ -1,5 +1,3 @@
-"use client"
-
 import "../Css/Input.css"
 
 export default function Input({
