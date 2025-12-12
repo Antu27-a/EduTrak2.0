@@ -6,6 +6,38 @@ import SearchBar from "../../components/ui/SearchBar"
 import "../../components/Css/Usuarios.css"
 
 export default function Usuarios() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [role, setRole] = useState('');
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError('');
+        setSuccess('');
+
+        try {
+            const response = await axios.post('/api/auth/register', {
+                email,
+                contraseña: password,
+                nombre: name,
+                rol: role,
+            });
+            setSuccess(response.data.Mensaje);
+        } catch (err) {
+            if (err.response) {
+                // El servidor respondió con un error (400, 500, etc)
+                setError(err.response.data.Error);
+            } else {
+                // No hubo respuesta (caída del backend, ruta incorrecta, etc)
+                setError("No se pudo conectar con el servidor.");
+            }
+        }
+    };
+
+
     const [preceptores, setPreceptores] = useState([
         { id: 1, nombre: "Juan Pérez", email: "juan@edutrak.com" },
         { id: 2, nombre: "María García", email: "maria@edutrak.com" },
@@ -77,16 +109,17 @@ export default function Usuarios() {
                         <UserPlus size={24} />
                         <h2>Registrar Preceptor</h2>
                     </div>
-                    <form onSubmit={handleAdd}>
+                    <form onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label>Nombre Completo</label>
                             <div className="input-icon">
                                 <User size={18} />
                                 <input
                                     type="text"
-                                    value={formData.nombre}
-                                    onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
                                     placeholder="Ej: Juan Pérez"
+                                    required
                                 />
                             </div>
                         </div>
@@ -96,12 +129,41 @@ export default function Usuarios() {
                                 <Mail size={18} />
                                 <input
                                     type="email"
-                                    value={formData.email}
-                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     placeholder="Ej: juan@edutrak.com"
                                 />
                             </div>
                         </div>
+
+                        <div className="form-group">
+                            <label>Contraseña</label>
+                            <div className="input-icon">
+                                <Mail size={18} />
+                                <input
+                                    type="password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    placeholder="Ej: juan@edutrak.com"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="form-group">
+                            <label>Rol</label>
+                            <div className="input-icon">
+                                <Mail size={18} />
+                                <select
+                                    value={role}
+                                    onChange={(e) => setRole(e.target.value)}
+                                >
+                                    <option value="" disabled>Selecciona un rol</option>
+                                    <option value="preceptor">Preceptor</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <button type="submit" className="btn-primary">
                             <UserPlus size={18} />
                             Registrar Preceptor
