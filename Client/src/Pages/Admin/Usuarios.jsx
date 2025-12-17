@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { UserPlus, Edit, Trash2, Mail, User } from "lucide-react"
+import { UserPlus, Edit, Trash2, Mail, User, Shield, Lock } from "lucide-react"
 import Modal from "../../components/ui/Modal"
 import Alert from "../../components/ui/Alert"
 import SearchBar from "../../components/ui/SearchBar"
@@ -36,6 +36,17 @@ export default function Usuarios() {
             }
         }
     };
+    const [permissionsModal, setPermissionsModal] = useState({
+        open: false,
+        preceptor: null
+    })
+
+    const [permissions, setPermissions] = useState({
+        asistenciaRegistrar: false,
+        asistenciaEditar: false,
+        verHistorial: false,
+        administrarUsuarios: false,
+    })
 
 
     const [preceptores, setPreceptores] = useState([
@@ -43,7 +54,6 @@ export default function Usuarios() {
         { id: 2, nombre: "María García", email: "maria@edutrak.com" },
     ])
     const [searchTerm, setSearchTerm] = useState("")
-    const [formData, setFormData] = useState({ nombre: "", email: "" })
 
     // Modal states
     const [editModal, setEditModal] = useState({ open: false, preceptor: null })
@@ -54,20 +64,6 @@ export default function Usuarios() {
 
     const showAlert = (message, type = "success") => {
         setAlert({ visible: true, message, type })
-    }
-
-    const handleAdd = (e) => {
-        e.preventDefault()
-        if (!formData.nombre || !formData.email) return
-
-        const newPreceptor = {
-            id: Date.now(),
-            nombre: formData.nombre,
-            email: formData.email,
-        }
-        setPreceptores([...preceptores, newPreceptor])
-        setFormData({ nombre: "", email: "" })
-        showAlert("Preceptor registrado exitosamente")
     }
 
     const handleEdit = () => {
@@ -139,12 +135,12 @@ export default function Usuarios() {
                         <div className="form-group">
                             <label>Contraseña</label>
                             <div className="input-icon">
-                                <Mail size={18} />
+                                <Lock size={18} />
                                 <input
                                     type="password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    placeholder="Ej: juan@edutrak.com"
+                                    placeholder="Ej: ..."
                                 />
                             </div>
                         </div>
@@ -191,6 +187,15 @@ export default function Usuarios() {
                                         </div>
                                     </div>
                                     <div className="item-actions">
+                                        <button
+                                            className="btn-icon permisos"
+                                            title="Permisos"
+                                            onClick={() =>
+                                                setPermissionsModal({ open: true, preceptor })
+                                            }
+                                        >
+                                            <Shield size={18} />
+                                        </button>
                                         <button
                                             className="btn-icon edit"
                                             onClick={() => setEditModal({ open: true, preceptor: { ...preceptor } })}
@@ -273,6 +278,99 @@ export default function Usuarios() {
                     </button>
                 </div>
             </Modal>
+
+            {/* Modal Permisos */}
+            <Modal
+                isOpen={permissionsModal.open}
+                onClose={() =>
+                    setPermissionsModal({ open: false, preceptor: null })
+                }
+                title="Gestión de Permisos"
+            >
+                <p>
+                    Permisos para{" "}
+                    <strong>{permissionsModal.preceptor?.nombre}</strong>
+                </p>
+                <div className="permissions-grid">
+
+                    <label className="permission-item">
+                        <span className="permission-text">Registrar asistencias</span>
+
+                        <input
+                            type="checkbox"
+                            checked={permissions.asistenciaRegistrar}
+                            onChange={(e) =>
+                                setPermissions({
+                                    ...permissions,
+                                    asistenciaRegistrar: e.target.checked,
+                                })
+                            }
+                        />
+                        <span className="custom-checkbox"></span>
+                    </label>
+
+                    <label className="permission-item">
+                        <span className="permission-text">Editar asistencias</span>
+
+                        <input
+                            type="checkbox"
+                            checked={permissions.asistenciaEditar}
+                            onChange={(e) =>
+                                setPermissions({
+                                    ...permissions,
+                                    asistenciaEditar: e.target.checked,
+                                })
+                            }
+                        />
+                        <span className="custom-checkbox"></span>
+                    </label>
+
+                    <label className="permission-item">
+                        <span className="permission-text">Ver historial</span>
+
+                        <input
+                            type="checkbox"
+                            checked={permissions.verHistorial}
+                            onChange={(e) =>
+                                setPermissions({
+                                    ...permissions,
+                                    verHistorial: e.target.checked,
+                                })
+                            }
+                        />
+                        <span className="custom-checkbox"></span>
+                    </label>
+
+                    <div className="modal-actions">
+                        <button
+                            className="btn-cancel"
+                            onClick={() =>
+                                setPermissionsModal({ open: false, preceptor: null })
+                            }
+                        >
+                            Cancelar
+                        </button>
+
+                        <button
+                            className="btn-confirm"
+                            onClick={() => {
+                                console.log(
+                                    "Permisos de",
+                                    permissionsModal.preceptor?.nombre,
+                                    permissions
+                                )
+                                setPermissionsModal({ open: false, preceptor: null })
+                            }}
+                        >
+                            Guardar permisos
+                        </button>
+                    </div>
+
+                </div>
+
+            </Modal>
+
+
         </div>
     )
 }
