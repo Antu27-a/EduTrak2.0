@@ -152,16 +152,6 @@ const getAsistenciasPorAlumno = async (id_alumno) => {
   return response.data
 }
 
-const notificarFaltas=async(email,nombre,apellido,faltas)=>{
-  const response = await apiClient.post("/notificacion", {
-    email,
-    nombre,
-    apellido,
-    faltas,
-  })
-  return response.data
-}
-
 const registerAttendance = async (fecha, estado, notificacion, id_usuario, id_alumno) => {
   const response = await apiClient.post("/asistencias", {
     fecha,
@@ -191,12 +181,36 @@ const getEstadisticasCursos = async () => {
   return response.data
 }
 
+
+const solicitarRecuperacion = async (email) => {
+  const response = await apiClient.post("/password-reset/solicitar", { email })
+  return response.data
+}
+
+const verificarCodigo = async (email, codigo) => {
+  const response = await apiClient.post("/password-reset/verificar", { email, codigo })
+  return response.data
+}
+
+const cambiarContraseña = async (email, codigo, nuevaContraseña) => {
+  const response = await apiClient.post("/password-reset/cambiar", { email, codigo, nuevaContraseña })
+  return response.data
+}
+
+const enviarNotificacionAsistencia = async (id_alumno) => {
+  const response = await apiClient.post("/asistencias/notificar", { id_alumno })
+  return response.data
+}
+
 export { API_URL, apiClient }
 
 export default {
   // Autenticación
   login,
   register,
+  solicitarRecuperacion,
+  verificarCodigo,
+  cambiarContraseña,
   // Usuarios
   getUsuarios,
   getUsuarioPorId,
@@ -223,9 +237,9 @@ export default {
   getAsistencias,
   getAsistenciasPorCurso,
   getAsistenciasPorAlumno,
-  notificarFaltas,
   registerAttendance,
   registerMultipleAttendances,
+  enviarNotificacionAsistencia,
   getEstadisticas,
   getEstadisticasCursos,
   // URL

@@ -32,7 +32,7 @@ export default function Login() {
     try {
       console.log("Enviando solicitud de login para:", email)
       const response = await api.login(email, contraseña)
-      console.log("[v0] Response recibida:", response)
+      console.log(" Response recibida:", response)
 
       if (response.token && response.usuario && response.usuario.rol) {
         console.log(" Login exitoso, guardando datos...")
@@ -89,7 +89,9 @@ export default function Login() {
           {error && <p className="error">{error}</p>}
           {success && <p className="success">{success}</p>}
 
-          <p className="forgot-password">¿Olvidaste tu contraseña?</p>
+          <p className="forgot-password" onClick={() => navigate("/forgot-password")}>
+            ¿Olvidaste tu contraseña?
+          </p>
         </div>
       </div>
     </div>
