@@ -198,6 +198,46 @@ export default function AdminDashboard() {
             <p style={{ fontSize: "32px", fontWeight: "700", color: card.color }}>{card.value}</p>
           </div>
         ))}
+        <div
+          style={{
+            marginTop: "40px",
+            background: "white",
+            padding: "28px",
+            borderRadius: "16px",
+            boxShadow: "0 6px 18px rgba(0,0,0,0.08)",
+            width: "150%",
+          }}
+        >
+          <button
+            onClick={exportarExcel}
+            style={{
+              marginBottom: "16px",
+              padding: "10px 18px",
+              backgroundColor: "#07454e",
+              color: "white",
+              border: "none",
+              borderRadius: "8px",
+              cursor: "pointer",
+              fontWeight: "600",
+            }}
+          >
+            Exportar a Excel
+          </button>
+          <h2
+            style={{
+              fontSize: "22px",
+              fontWeight: "700",
+              color: "#07454e",
+              marginBottom: "20px",
+            }}
+          >
+            Alumnos por curso
+          </h2>
+
+          <div style={{ height: "340px" }}>
+            <Bar data={chartData} options={chartOptions} />
+          </div>
+        </div>
       </div>
 
       <div

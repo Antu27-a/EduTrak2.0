@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import { LayoutDashboard, Users, BookOpen, Settings, LogOut, Menu, X, AlertTriangle, UserCheck } from "lucide-react"
+import { LayoutDashboard, Users, BookOpen, Settings, LogOut, Menu, X, AlertTriangle, UserCheck, GraduationCap } from "lucide-react"
 import eduTrakLogo from "../../assets/img/EDU-TRAK-LOGO.png"
 import Modal from "../ui/Modal"
 import { useAuth } from "../../Context/AuthContext"
