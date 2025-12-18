@@ -19,10 +19,16 @@ export default function CursosAsignados() {
   const cargarCursos = async () => {
     try {
       setLoading(true)
-      const data = await api.getCursos()
+      console.log("Cargando cursos del preceptor...")
+      const token = localStorage.getItem("token")
+      console.log("Token:", token ? "Presente" : "No encontrado")
+      const data = await api.getCursosPreceptor()
+      console.log("[Cursos recibidos:", data)
       setCursos(data)
     } catch (error) {
       console.error("Error al cargar cursos:", error)
+      console.error("Error details:", error.response?.data)
+      console.error("Status code:", error.response?.status)
     } finally {
       setLoading(false)
     }
@@ -103,7 +109,7 @@ export default function CursosAsignados() {
       {filteredCursos.length === 0 && !loading && (
         <div className="empty-state">
           <BookOpen size={48} />
-          <p>No se encontraron cursos</p>
+          <p>No tienes cursos asignados</p>
         </div>
       )}
     </div>

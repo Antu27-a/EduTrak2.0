@@ -4,6 +4,7 @@ import AdminDashboard from "../Pages/Admin/AdminDashboard"
 import Usuarios from "../Pages/Admin/Usuarios"
 import Alumnos from "../Pages/Admin/Alumnos"
 import Cursos from "../Pages/Admin/Cursos"
+import AsignarCursos from "../Pages/Admin/AsignarCursos"
 import Configuracion from "../Pages/Admin/Configuracion"
 import Login from "../Pages/Login"
 import Landing from "../Pages/Landing"
@@ -34,6 +35,7 @@ export default function AppRoutes() {
         <Route path="usuarios" element={<Usuarios />} />
         <Route path="alumnos" element={<Alumnos />} />
         <Route path="cursos" element={<Cursos />} />
+        <Route path="asignar-cursos" element={<AsignarCursos />} />
         <Route path="configuracion" element={<Configuracion />} />
       </Route>
 

@@ -120,10 +120,113 @@ const EliminarCurso = async (req, res) => {
   }
 }
 
+const AsignarCursoPreceptor = async (req, res) => {
+  try {
+    const { id_usuario, id_curso } = req.body
+
+    if (!id_usuario || !id_curso) {
+      return res.status(400).json({ Error: "Faltan datos obligatorios" })
+    }
+
+    const query = `INSERT INTO Curso_Preceptor (id_usuario, id_curso) VALUES (?, ?)`
+    db.run(query, [id_usuario, id_curso], (error) => {
+      if (error) {
+        if (error.message.includes("UNIQUE")) {
+          return res.status(400).json({ Error: "El curso ya está asignado a este preceptor" })
+        }
+        console.error("Error al asignar curso:", error.message)
+        return res.status(500).json({ Error: "Error al asignar curso" })
+      }
+      res.status(201).json({ Mensaje: "Curso asignado correctamente" })
+    })
+  } catch (error) {
+    console.error("Error en AsignarCursoPreceptor:", error)
+    res.status(500).json({ Error: "Error del servidor" })
+  }
+}
+
+const DesasignarCursoPreceptor = async (req, res) => {
+  try {
+    const { id_usuario, id_curso } = req.body
+
+    const query = `DELETE FROM Curso_Preceptor WHERE id_usuario = ? AND id_curso = ?`
+    db.run(query, [id_usuario, id_curso], function (error) {
+      if (error) {
+        console.error("Error al desasignar curso:", error.message)
+        return res.status(500).json({ Error: "Error al desasignar curso" })
+      }
+      if (this.changes === 0) {
+        return res.status(404).json({ Error: "Asignación no encontrada" })
+      }
+      res.status(200).json({ Mensaje: "Curso desasignado correctamente" })
+    })
+  } catch (error) {
+    console.error("Error en DesasignarCursoPreceptor:", error)
+    res.status(500).json({ Error: "Error del servidor" })
+  }
+}
+
+const ObtenerPreceptoresPorCurso = async (req, res) => {
+  try {
+    const { id_curso } = req.params
+
+    const query = `
+      SELECT 
+        u.id_user,
+        u.nombre,
+        u.email
+      FROM Usuario u
+      INNER JOIN Curso_Preceptor cp ON u.id_user = cp.id_usuario
+      WHERE cp.id_curso = ? AND u.rol = 'preceptor'
+    `
+    db.all(query, [id_curso], (error, preceptores) => {
+      if (error) {
+        console.error("Error al obtener preceptores:", error.message)
+        return res.status(500).json({ Error: "Error al obtener preceptores" })
+      }
+      res.status(200).json(preceptores)
+    })
+  } catch (error) {
+    console.error("Error en ObtenerPreceptoresPorCurso:", error)
+    res.status(500).json({ Error: "Error del servidor" })
+  }
+}
+
+const ObtenerTodasAsignaciones = async (req, res) => {
+  try {
+    const query = `
+      SELECT 
+        cp.id_usuario,
+        cp.id_curso,
+        c.curso,
+        c.turno,
+        u.nombre as nombre_preceptor
+      FROM Curso_Preceptor cp
+      INNER JOIN Curso c ON cp.id_curso = c.id_curso
+      INNER JOIN Usuario u ON cp.id_usuario = u.id_user
+      WHERE u.rol = 'preceptor'
+    `
+    db.all(query, [], (error, asignaciones) => {
+      if (error) {
+        console.error("Error al obtener asignaciones:", error.message)
+        return res.status(500).json({ Error: "Error al obtener asignaciones" })
+      }
+      res.status(200).json(asignaciones)
+    })
+  } catch (error) {
+    console.error("Error en ObtenerTodasAsignaciones:", error)
+    res.status(500).json({ Error: "Error del servidor" })
+  }
+}
+
 module.exports = {
   RegistrarCurso,
   ObtenerCursos,
   ObtenerCursoPorId,
   ActualizarCurso,
   EliminarCurso,
+  AsignarCursoPreceptor,
+  DesasignarCursoPreceptor,
+  ObtenerPreceptoresPorCurso,
+  ObtenerTodasAsignaciones, 
 }

@@ -111,6 +111,26 @@ const deleteCurso = async (id) => {
   return response.data
 }
 
+const asignarCursoPreceptor = async (id_usuario, id_curso) => {
+  const response = await apiClient.post("/cursos/asignar", { id_usuario, id_curso })
+  return response.data
+}
+
+const desasignarCursoPreceptor = async (id_usuario, id_curso) => {
+  const response = await apiClient.post("/cursos/desasignar", { id_usuario, id_curso })
+  return response.data
+}
+
+const getPreceptoresPorCurso = async (id_curso) => {
+  const response = await apiClient.get(`/cursos/${id_curso}/preceptores`)
+  return response.data
+}
+
+const getTodasAsignaciones = async () => {
+  const response = await apiClient.get("/cursos/asignaciones")
+  return response.data
+} 
+
 // ========== ASISTENCIAS ==========
 const getAsistencias = async () => {
   const response = await apiClient.get("/asistencias")
@@ -179,6 +199,10 @@ export default {
   registerCourse,
   updateCurso,
   deleteCurso,
+  asignarCursoPreceptor,
+  desasignarCursoPreceptor,
+  getPreceptoresPorCurso,
+  getTodasAsignaciones, 
   // Asistencias
   getAsistencias,
   getAsistenciasPorCurso,

@@ -43,14 +43,36 @@ const ActualizarUsuario = async (req, res) => {
     const { id } = req.params
     const { email, nombre, rol, contraseña } = req.body
 
-    let query = `UPDATE Usuario SET email=?, nombre=?, rol=? WHERE id_user=?`
-    let params = [email, nombre, rol, id]
+    const campos = []
+    const params = []
 
-    if (contraseña) {
-      const hash = await EncriptarContraseña(contraseña)
-      query = `UPDATE Usuario SET email=?, nombre=?, rol=?, contraseña=? WHERE id_user=?`
-      params = [email, nombre, rol, hash, id]
+    if (email !== undefined) {
+      campos.push("email=?")
+      params.push(email)
     }
+
+    if (nombre !== undefined) {
+      campos.push("nombre=?")
+      params.push(nombre)
+    }
+
+    if (rol !== undefined) {
+      campos.push("rol=?")
+      params.push(rol)
+    }
+
+    if (contraseña !== undefined && contraseña !== "") {
+      const hash = await EncriptarContraseña(contraseña)
+      campos.push("contraseña=?")
+      params.push(hash)
+    }
+
+    if (campos.length === 0) {
+      return res.status(400).json({ Error: "No hay campos para actualizar" })
+    }
+
+    params.push(id)
+    const query = `UPDATE Usuario SET ${campos.join(", ")} WHERE id_user=?`
 
     db.run(query, params, function (error) {
       if (error) {

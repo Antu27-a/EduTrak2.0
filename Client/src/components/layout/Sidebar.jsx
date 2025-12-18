@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import { LayoutDashboard, Users, BookOpen, GraduationCap, Settings, LogOut, Menu, X, AlertTriangle } from "lucide-react"
+import { LayoutDashboard, Users, BookOpen, GraduationCap, Settings, LogOut, Menu, X, AlertTriangle, UserCheck } from "lucide-react"
 import Modal from "../ui/Modal"
 import { useAuth } from "../../Context/AuthContext"
 import "../Css/Sidebar.css"
@@ -19,6 +19,7 @@ export default function Sidebar() {
     { path: "/admin/usuarios", label: "Usuarios", icon: Users },
     { path: "/admin/cursos", label: "Cursos", icon: BookOpen },
     { path: "/admin/alumnos", label: "Alumnos", icon: GraduationCap },
+    { path: "/admin/asignar-cursos", label: "Asignar Cursos", icon: UserCheck },
     { path: "/admin/configuracion", label: "Configuración", icon: Settings },
   ]
 

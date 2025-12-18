@@ -22,13 +22,19 @@ export default function PreceptorHome() {
   const cargarEstadisticas = async () => {
     try {
       setLoading(true)
-      const [cursosData, estadisticas] = await Promise.all([api.getCursos(), api.getEstadisticas()])
+      const cursosData = await api.getCursosPreceptor()
+      const alumnosPromises = cursosData.map((curso) => api.getAlumnosPorCurso(curso.id_curso))
+      const alumnosArrays = await Promise.all(alumnosPromises)
+      const totalAlumnos = alumnosArrays.reduce((sum, arr) => sum + arr.length, 0)
+      const hoy = new Date().toISOString().split("T")[0]
+      const asistencias = await api.getAsistencias()
+      const asistenciasHoy = asistencias.filter((a) => a.fecha.split("T")[0] === hoy)
 
       setStats({
         cursosAsignados: cursosData.length,
-        totalAlumnos: estadisticas.totalAlumnos,
-        asistenciasHoy: estadisticas.asistenciasHoy.presentes,
-        faltasHoy: estadisticas.asistenciasHoy.ausentes,
+        totalAlumnos,
+        asistenciasHoy: asistenciasHoy.filter((a) => a.estado === "presente").length,
+        faltasHoy: asistenciasHoy.filter((a) => a.estado === "ausente").length,
       })
     } catch (error) {
       console.error("Error al cargar estadísticas:", error)

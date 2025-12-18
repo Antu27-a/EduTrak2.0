@@ -50,6 +50,17 @@ const db_crear=new SQLite3.Database(SQLite3_Ubicacion, (error)=>{
                 FOREIGN KEY (id_alumno) REFERENCES Alumno(id_alumno)
                     ON DELETE CASCADE
             );
+
+            CREATE TABLE IF NOT EXISTS Curso_Preceptor (
+                id_asignacion INTEGER PRIMARY KEY AUTOINCREMENT,
+                id_usuario INTEGER NOT NULL,
+                id_curso INTEGER NOT NULL,
+                FOREIGN KEY (id_usuario) REFERENCES Usuario(id_user)
+                    ON DELETE CASCADE,
+                FOREIGN KEY (id_curso) REFERENCES Curso(id_curso)
+                    ON DELETE CASCADE,
+                UNIQUE(id_usuario, id_curso)
+            );
             `,(error)=>{
                 if(error){
                     console.error('Error al crear las tablas 🤬', error.message)
