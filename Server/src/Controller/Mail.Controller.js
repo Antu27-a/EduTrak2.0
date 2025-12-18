@@ -13,7 +13,7 @@ const enviarNotificacion = async (req, res) => {
     });
 
     const mailOptions = {
-      from: `"Sistema Escolar" <${process.env.MAIL_USER}>`,
+      from: `"EduTrak" <${process.env.MAIL_USER}>`,
       to: email,
       subject: "Notificación por inasistencias",
       html: `
