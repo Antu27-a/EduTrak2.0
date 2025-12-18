@@ -152,6 +152,16 @@ const getAsistenciasPorAlumno = async (id_alumno) => {
   return response.data
 }
 
+const notificarFaltas=async(email,nombre,apellido,faltas)=>{
+  const response = await apiClient.post("/notificacion", {
+    email,
+    nombre,
+    apellido,
+    faltas,
+  })
+  return response.data
+}
+
 const registerAttendance = async (fecha, estado, notificacion, id_usuario, id_alumno) => {
   const response = await apiClient.post("/asistencias", {
     fecha,
@@ -213,6 +223,7 @@ export default {
   getAsistencias,
   getAsistenciasPorCurso,
   getAsistenciasPorAlumno,
+  notificarFaltas,
   registerAttendance,
   registerMultipleAttendances,
   getEstadisticas,

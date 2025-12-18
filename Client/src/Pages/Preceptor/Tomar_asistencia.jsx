@@ -66,13 +66,25 @@ export default function TomarAsistencia() {
     setModalOpen(true)
   }
 
-  const confirmarEnvioNotificacion = () => {
-    setModalOpen(false)
-    setAlert({
-      isVisible: true,
-      message: `Notificación enviada a ${selectedAlumno.email}`,
-      type: "success",
-    })
+  const confirmarEnvioNotificacion = async () => {
+    try {
+      await api.notificarFaltas(selectedAlumno.email,selectedAlumno.nombre,selectedAlumno.apellido,selectedAlumno.faltas);
+      setModalOpen(false)
+      setAlert({
+        isVisible: true,
+        message: `Notificación enviada a ${selectedAlumno.email}`,
+        type: "success",
+      })
+    } catch (error) {
+      console.error(error);
+      setAlert({
+        isVisible: true,
+        message: "Error al enviar la notificación",
+        type: "error",
+      });
+    }
+
+
   }
 
   const guardarAsistencia = async () => {
