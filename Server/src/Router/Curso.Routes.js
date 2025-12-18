@@ -1,9 +1,12 @@
 const Express = require("express")
 const Rutas = Express.Router()
+const authMiddleware = require("../middlewares/auth.middleware")
+
 
 const {
   RegistrarCurso,
   ObtenerCursos,
+  ObtenerCursosPreceptor,
   ObtenerCursoPorId,
   ActualizarCurso,
   EliminarCurso,
@@ -15,6 +18,8 @@ const {
 
 Rutas.post("/cursos", RegistrarCurso)
 Rutas.get("/cursos", ObtenerCursos)
+Rutas.get("/cursos/preceptor/mis-cursos", authMiddleware, ObtenerCursosPreceptor)
+Rutas.get("/cursos/asignaciones", ObtenerTodasAsignaciones)
 Rutas.get("/cursos/:id", ObtenerCursoPorId)
 Rutas.put("/cursos/:id", ActualizarCurso)
 Rutas.delete("/cursos/:id", EliminarCurso)

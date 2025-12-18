@@ -91,6 +91,11 @@ const getCursos = async () => {
   return response.data
 }
 
+const getCursosPreceptor = async () => {
+  const response = await apiClient.get("/cursos/preceptor/mis-cursos")
+  return response.data
+}
+
 const getCursoPorId = async (id) => {
   const response = await apiClient.get(`/cursos/${id}`)
   return response.data
@@ -195,6 +200,7 @@ export default {
   deleteAlumno,
   // Cursos
   getCursos,
+  getCursosPreceptor,
   getCursoPorId,
   registerCourse,
   updateCurso,

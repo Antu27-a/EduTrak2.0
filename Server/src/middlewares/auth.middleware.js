@@ -1,21 +1,28 @@
-const jwt = require('jsonwebtoken');
-const db = require('../DataBase/db');
+const jwt = require("jsonwebtoken")
+const db = require("../DataBase/db")
 
 const authMiddleware = (req, res, next) => {
-    const token = req.headers['authorization'];
+  let token = req.headers["authorization"]
 
-    if (!token) {
-        return res.status(403).json({ Error: 'Token no proporcionado' });
+  if (!token) {
+    return res.status(403).json({ Error: "Token no proporcionado" })
+  }
+
+  if (token.startsWith("Bearer ")) {
+    token = token.slice(7, token.length)
+  }
+
+  jwt.verify(token, process.env.JWT_SECRET || "edutrak_secret_key_2024", (err, decoded) => {
+    if (err) {
+      console.error("Error al verificar token:", err.message)
+      return res.status(401).json({ Error: "Token no válido" })
     }
 
-    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-        if (err) {
-            return res.status(401).json({ Error: 'Token no válido' });
-        }
+    req.userId = decoded.id_user
+    req.userEmail = decoded.email
+    req.userRol = decoded.rol
+    next()
+  })
+}
 
-        req.userId = decoded.id;
-        next();
-    });
-};
-
-module.exports = authMiddleware;
+module.exports = authMiddleware

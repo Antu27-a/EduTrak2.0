@@ -48,6 +48,35 @@ const ObtenerCursos = async (req, res) => {
   }
 }
 
+const ObtenerCursosPreceptor = async (req, res) => {
+  try {
+    const id_usuario = req.userId // del middleware de autenticación
+
+    const query = `
+      SELECT 
+        c.id_curso, 
+        c.curso, 
+        c.turno,
+        COUNT(a.id_alumno) as cantidadAlumnos
+      FROM Curso c
+      INNER JOIN Curso_Preceptor cp ON c.id_curso = cp.id_curso
+      LEFT JOIN Alumno a ON c.id_curso = a.id_curso
+      WHERE cp.id_usuario = ?
+      GROUP BY c.id_curso
+    `
+    db.all(query, [id_usuario], (error, cursos) => {
+      if (error) {
+        console.error("Error al obtener cursos del preceptor:", error.message)
+        return res.status(500).json({ Error: "Error al obtener cursos" })
+      }
+      res.status(200).json(cursos)
+    })
+  } catch (error) {
+    console.error("Error en ObtenerCursosPreceptor:", error)
+    res.status(500).json({ Error: "Error del servidor" })
+  }
+}
+
 const ObtenerCursoPorId = async (req, res) => {
   try {
     const { id } = req.params
@@ -222,6 +251,7 @@ const ObtenerTodasAsignaciones = async (req, res) => {
 module.exports = {
   RegistrarCurso,
   ObtenerCursos,
+  ObtenerCursosPreceptor,
   ObtenerCursoPorId,
   ActualizarCurso,
   EliminarCurso,
