@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer";
+const nodemailer = require("nodemailer")
 
 const enviarNotificacion = async (req, res) => {
   const { email, nombre, apellido, faltas } = req.body;
@@ -25,9 +25,9 @@ const enviarNotificacion = async (req, res) => {
       `,
     };
 
-    await transporter.sendMail(mailOptions);
+    await transporter.sendMail(mailOptions)
 
-    res.status(200).json({ message: "Mail enviado correctamente" });
+    res.status(200).json({ message: "Mail enviado correctamente" })
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error al enviar el mail" });

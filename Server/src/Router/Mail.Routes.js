@@ -1,10 +1,8 @@
-import express from "express";
+const express = require("express")
+const { enviarNotificacion } = require("../Controller/Mail.Controller")
 
+const Ruta = express.Router()
 
-const {enviarNotificacion}=require("../controllers/mail.controller.js")
+Ruta.post("/notificacion", enviarNotificacion)
 
-const Ruta = express.Router();
-
-Ruta.post("/notificacion", enviarNotificacion);
-
-export default Ruta;
+module.exports = Ruta

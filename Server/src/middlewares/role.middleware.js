@@ -1,7 +1,6 @@
-
 const roleMiddleware = (rolPermitido) => {
     return (req, res, next) => {
-        if (!req.user || req.user.rol !== rolPermitido) {
+        if (!req.userRol || req.userRol !== rolPermitido) {
             return res.status(403).json({
                 Error: "No tenés permisos para realizar esta acción",
             })
@@ -10,4 +9,4 @@ const roleMiddleware = (rolPermitido) => {
     }
 }
 
-module.exports = roleMiddleware;
+module.exports = roleMiddleware
