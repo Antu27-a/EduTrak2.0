@@ -151,6 +151,11 @@ const getEstadisticas = async () => {
   return response.data
 }
 
+const getEstadisticasCursos = async () => {
+  const response = await apiClient.get("/estadisticascursos")
+  return response.data
+}
+
 export { API_URL, apiClient }
 
 export default {
@@ -181,6 +186,7 @@ export default {
   registerAttendance,
   registerMultipleAttendances,
   getEstadisticas,
+  getEstadisticasCursos,
   // URL
   API_URL,
 }
