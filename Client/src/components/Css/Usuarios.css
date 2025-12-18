@@ -227,15 +227,6 @@
   color: white;
 }
 
-.btn-icon.permisos{
-  background: #ffe1b9;
-}
-
-.btn-icon.permisos:hover{
-  background-color: #ffae44;
-  color: white;
-}
-
 .empty-message {
   text-align: center;
   color: var(--text-muted);
@@ -246,79 +237,4 @@
   color: var(--negative);
   font-size: 14px;
   margin-top: 8px;
-}
-
-
-.permissions-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  margin-top: 16px;
-}
-
-.permission-item {
-  display: flex;
-  flex-direction: row;              
-  align-items: center;            
-  justify-content: space-between;  
-  padding: 14px 18px;
-  border-radius: 16px;
-
-  background: #f3fff4;
-  border: 1px solid #c7ccff;
-  cursor: pointer;
-  transition: background 0.2s ease, border 0.2s ease;
-}
-
-.permission-item:hover {
-  background: #e9ffea;
-}
-
-
-.permission-text {
-  font-size: 17px;
-  font-weight: 500;
-  color: #2e2e2e;
-}
-
-.permission-item input[type="checkbox"] {
-  display: none;
-}
-
-/* Checkbox visual */
-.custom-checkbox {
-  width: 26px;
-  height: 26px;
-  border-radius: 8px;
-  border: 2px solid #07454e;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;  
-  transition: all 0.2s ease;
-  margin-left: auto;
-}
-
-/* Tilde */
-.custom-checkbox::after {
-  content: "✓";
-  font-size: 16px;
-  font-weight: bold;
-  color: #f7fffe;
-
-  opacity: 0;
-  transform: scale(0.5);
-  transition: all 0.15s ease;
-}
-
-/* Estado activo */
-.permission-item input:checked + .custom-checkbox {
-  background: #000000;
-  border-color: #00796b;
-  
-}
-
-.permission-item input:checked + .custom-checkbox::after {
-  opacity: 1;
-  transform: scale(1);
 }
