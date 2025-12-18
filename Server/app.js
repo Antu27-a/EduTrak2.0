@@ -14,7 +14,8 @@ const UsuarioRoutes = require("./src/Router/Usuario.Routes")
 const AlumnoRoutes = require("./src/Router/Alumno.Routes")
 const CursoRoutes = require("./src/Router/Curso.Routes")
 const AsistenciaRoutes = require("./src/Router/Asistencia.Routes")
-const Mail = require("./src/Router/Mail.Routes")
+const PasswordResetRoutes = require("./src/Router/PasswordReset.Routes")
+
 
 
 
@@ -23,7 +24,8 @@ App.use("/api", UsuarioRoutes)
 App.use("/api", AlumnoRoutes)
 App.use("/api", CursoRoutes)
 App.use("/api", AsistenciaRoutes)
-App.use("/api", Mail)
+App.use("/api", PasswordResetRoutes)
+
 
 App.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`)

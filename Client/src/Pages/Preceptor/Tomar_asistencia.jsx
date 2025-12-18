@@ -20,6 +20,7 @@ export default function TomarAsistencia() {
   const [cursoInfo, setCursoInfo] = useState(null)
   const [alumnos, setAlumnos] = useState([])
   const [loading, setLoading] = useState(true)
+  const [enviandoNotificacion, setEnviandoNotificacion] = useState(false)
 
   useEffect(() => {
     cargarDatos()
@@ -67,24 +68,25 @@ export default function TomarAsistencia() {
   }
 
   const confirmarEnvioNotificacion = async () => {
+    setEnviandoNotificacion(true)
     try {
-      await api.notificarFaltas(selectedAlumno.email,selectedAlumno.nombre,selectedAlumno.apellido,selectedAlumno.faltas);
+      await api.enviarNotificacionAsistencia(selectedAlumno.id_alumno)
       setModalOpen(false)
       setAlert({
         isVisible: true,
-        message: `Notificación enviada a ${selectedAlumno.email}`,
+        message: `Notificación enviada exitosamente a ${selectedAlumno.email}`,
         type: "success",
       })
     } catch (error) {
-      console.error(error);
+      console.error("Error al enviar notificación:", error)
       setAlert({
         isVisible: true,
-        message: "Error al enviar la notificación",
+        message: error.response?.data?.Error || "Error al enviar la notificación",
         type: "error",
-      });
+      })
+    } finally {
+      setEnviandoNotificacion(false)
     }
-
-
   }
 
   const guardarAsistencia = async () => {
@@ -271,7 +273,11 @@ export default function TomarAsistencia() {
         </Button>
       </div>
 
-      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title="Enviar Notificación">
+      <Modal
+        isOpen={modalOpen}
+        onClose={() => !enviandoNotificacion && setModalOpen(false)}
+        title="Enviar Notificación"
+      >
         {selectedAlumno && (
           <div className="modal-notification">
             <p>¿Desea enviar una notificación de faltas a:</p>
@@ -283,12 +289,12 @@ export default function TomarAsistencia() {
               <span className="faltas-info">Acumuladas: {selectedAlumno.faltas} faltas</span>
             </div>
             <div className="modal-actions">
-              <button className="btn-cancel" onClick={() => setModalOpen(false)}>
+              <button className="btn-cancel" onClick={() => setModalOpen(false)} disabled={enviandoNotificacion}>
                 Cancelar
               </button>
-              <button className="btn-confirm" onClick={confirmarEnvioNotificacion}>
+              <button className="btn-confirm" onClick={confirmarEnvioNotificacion} disabled={enviandoNotificacion}>
                 <Send size={16} />
-                Enviar Notificación
+                {enviandoNotificacion ? "Enviando..." : "Enviar Notificación"}
               </button>
             </div>
           </div>

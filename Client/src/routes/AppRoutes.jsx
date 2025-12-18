@@ -7,6 +7,7 @@ import Cursos from "../Pages/Admin/Cursos"
 import AsignarCursos from "../Pages/Admin/AsignarCursos"
 import Configuracion from "../Pages/Admin/Configuracion"
 import Login from "../Pages/Login"
+import ForgotPassword from "../Pages/ForgotPassword"
 import Landing from "../Pages/Landing"
 import PreceptorLayout from "../components/layout/PreceptorLayout"
 import CursosAsignados from "../Pages/Preceptor/Cursos_asignados"
@@ -21,6 +22,7 @@ export default function AppRoutes() {
       {/* Rutas públicas */}
       <Route path="/" element={<Landing />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
 
       <Route
         path="/admin"

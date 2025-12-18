@@ -1,4 +1,5 @@
 const db = require("../DataBase/db")
+const { EnviarNotificacionAsistencia } = require("../Utils/EnviarEmail")
 
 const RegistrarAsistencia = async (req, res) => {
   const { fecha, estado, notificacion, id_usuario, id_alumno } = req.body
@@ -241,6 +242,64 @@ const ObtenerAlumnosPorCurso = async (req, res) => {
   }
 }
 
+const EnviarNotificacion = async (req, res) => {
+  try {
+    const { id_alumno } = req.body
+
+    if (!id_alumno) {
+      return res.status(400).json({ Error: "ID de alumno es requerido" })
+    }
+
+    const query = `
+      SELECT 
+        a.nombre,
+        a.apellido,
+        a.email,
+        c.curso,
+        c.turno,
+        COUNT(CASE WHEN asist.estado = 'Ausente' THEN 1 END) as faltas
+      FROM Alumno a
+      JOIN Curso c ON a.id_curso = c.id_curso
+      LEFT JOIN Asistencia asist ON a.id_alumno = asist.id_alumno
+      WHERE a.id_alumno = ?
+      GROUP BY a.id_alumno
+    `
+
+    db.get(query, [id_alumno], async (error, alumno) => {
+      if (error) {
+        console.error("Error al obtener información del alumno:", error.message)
+        return res.status(500).json({ Error: "Error al obtener información del alumno" })
+      }
+
+      if (!alumno) {
+        return res.status(404).json({ Error: "Alumno no encontrado" })
+      }
+
+      if (!alumno.email) {
+        return res.status(400).json({ Error: "El alumno no tiene un email registrado" })
+      }
+
+      try {
+        const nombreCompleto = `${alumno.nombre} ${alumno.apellido}`
+        const nombreCurso = `${alumno.curso} - Turno ${alumno.turno}`
+
+        await EnviarNotificacionAsistencia(alumno.email, nombreCompleto, nombreCurso, alumno.faltas)
+
+        return res.status(200).json({
+          Mensaje: "Notificación enviada correctamente",
+          email: alumno.email,
+        })
+      } catch (emailError) {
+        console.error("Error al enviar email:", emailError)
+        return res.status(500).json({ Error: "Error al enviar la notificación por email" })
+      }
+    })
+  } catch (error) {
+    console.error("Error en EnviarNotificacion:", error)
+    return res.status(500).json({ Error: "Error del servidor" })
+  }
+}
+
 module.exports = {
   RegistrarAsistencia,
   RegistrarAsistenciasMultiples,
@@ -249,4 +308,5 @@ module.exports = {
   ObtenerAsistenciasPorAlumno,
   ObtenerEstadisticas,
   ObtenerAlumnosPorCurso,
+  EnviarNotificacion,
 }

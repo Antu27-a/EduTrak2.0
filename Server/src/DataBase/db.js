@@ -61,6 +61,17 @@ const db_crear=new SQLite3.Database(SQLite3_Ubicacion, (error)=>{
                     ON DELETE CASCADE,
                 UNIQUE(id_usuario, id_curso)
             );
+
+            CREATE TABLE IF NOT EXISTS Password_Reset (
+                id_reset INTEGER PRIMARY KEY AUTOINCREMENT,
+                email TEXT NOT NULL,
+                codigo TEXT NOT NULL,
+                expiracion TEXT NOT NULL,
+                usado INTEGER DEFAULT 0,
+                creado TEXT DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (email) REFERENCES Usuario(email)
+                    ON DELETE CASCADE
+            );
             `,(error)=>{
                 if(error){
                     console.error('Error al crear las tablas 🤬', error.message)
