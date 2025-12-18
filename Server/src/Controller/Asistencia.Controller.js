@@ -207,6 +207,40 @@ const ObtenerEstadisticas = async (req, res) => {
   }
 }
 
+const ObtenerAlumnosPorCurso = async (req, res) => {
+  try {
+    const query = `
+      SELECT 
+        c.id_curso,
+        c.curso,
+        c.turno,
+        COUNT(a.id_alumno) AS cantidad
+      FROM Curso c
+      LEFT JOIN Alumno a ON a.id_curso = c.id_curso
+      GROUP BY c.id_curso, c.curso, c.turno
+      ORDER BY c.curso
+    `
+
+    db.all(query, [], (err, rows) => {
+      if (err) {
+        console.error("Error en ObtenerAlumnosPorCurso:", err)
+        return res.status(500).json({ Error: "Error del servidor" })
+      }
+
+      
+      const resultado = rows.map(row => ({
+        curso: `${row.curso} (${row.turno})`,
+        cantidad: row.cantidad
+      }))
+
+      res.status(200).json(resultado)
+    })
+  } catch (error) {
+    console.error("Error en ObtenerAlumnosPorCurso:", error)
+    res.status(500).json({ Error: "Error del servidor" })
+  }
+}
+
 module.exports = {
   RegistrarAsistencia,
   RegistrarAsistenciasMultiples,
@@ -214,4 +248,5 @@ module.exports = {
   ObtenerAsistenciasPorCurso,
   ObtenerAsistenciasPorAlumno,
   ObtenerEstadisticas,
+  ObtenerAlumnosPorCurso,
 }

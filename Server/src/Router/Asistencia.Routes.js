@@ -8,6 +8,7 @@ const {
   ObtenerAsistenciasPorCurso,
   ObtenerAsistenciasPorAlumno,
   ObtenerEstadisticas,
+  ObtenerAlumnosPorCurso,
 } = require("../Controller/Asistencia.Controller")
 
 Rutas.post("/asistencias", RegistrarAsistencia)
@@ -16,5 +17,6 @@ Rutas.get("/asistencias", ObtenerAsistencias)
 Rutas.get("/asistencias/curso/:id_curso", ObtenerAsistenciasPorCurso)
 Rutas.get("/asistencias/alumno/:id_alumno", ObtenerAsistenciasPorAlumno)
 Rutas.get("/estadisticas", ObtenerEstadisticas)
+Rutas.get("/estadisticascursos", ObtenerAlumnosPorCurso)
 
 module.exports = Rutas
