@@ -2,7 +2,8 @@
 
 import { useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import { LayoutDashboard, Users, BookOpen, GraduationCap, Settings, LogOut, Menu, X, AlertTriangle, UserCheck } from "lucide-react"
+import { LayoutDashboard, Users, BookOpen, Settings, LogOut, Menu, X, AlertTriangle, UserCheck } from "lucide-react"
+import eduTrakLogo from "../../assets/img/EDU-TRAK-LOGO.png"
 import Modal from "../ui/Modal"
 import { useAuth } from "../../Context/AuthContext"
 import "../Css/Sidebar.css"
@@ -45,7 +46,7 @@ export default function Sidebar() {
       <aside className={`sidebar ${mobileMenuOpen ? "open" : ""}`}>
         <div className="sidebar-header">
           <div className="logo">
-            <GraduationCap size={32} style={{ color: "#07454e" }} />
+            <img src={eduTrakLogo} alt="EduTrak" className="sidebar-logo-img" />
             <div className="logo-text">
               <h2>EduTrak</h2>
               <span>Panel Admin</span>

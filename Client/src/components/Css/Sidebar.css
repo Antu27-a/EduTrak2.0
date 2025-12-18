@@ -258,3 +258,11 @@
 .logout-modal-actions .btn-logout-confirm:hover {
   background: #8b1515;
 }
+
+/* Logo image inside sidebar */
+.sidebar-logo-img {
+  width: 42px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 6px;
+}

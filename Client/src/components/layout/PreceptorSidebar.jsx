@@ -2,7 +2,8 @@
 
 import { useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import { BookOpen, ClipboardList, Settings, LogOut, GraduationCap, AlertTriangle, Menu, X } from "lucide-react"
+import { BookOpen, ClipboardList, Settings, LogOut, AlertTriangle, Menu, X } from "lucide-react"
+import eduTrakLogo from "../../assets/img/EDU-TRAK-LOGO.png"
 import Modal from "../ui/Modal"
 import { useAuth } from "../../Context/AuthContext"
 import "../Css/Sidebar.css"
@@ -43,7 +44,7 @@ export default function PreceptorSidebar() {
       <aside className={`sidebar ${mobileMenuOpen ? "open" : ""}`}>
         <div className="sidebar-header">
           <div className="logo">
-            <GraduationCap size={32} style={{ color: "#07454e" }} />
+            <img src={eduTrakLogo} alt="EduTrak" className="sidebar-logo-img" />
             <div className="logo-text">
               <h2>EduTrak</h2>
               <span>Preceptor</span>
