@@ -1,4 +1,5 @@
 const db = require("../DataBase/db")
+const { EnviarNotificacionAsistencia } = require("../Utils/EnviarEmail")
 
 const RegistrarAsistencia = async (req, res) => {
   const { fecha, estado, notificacion, id_usuario, id_alumno } = req.body
