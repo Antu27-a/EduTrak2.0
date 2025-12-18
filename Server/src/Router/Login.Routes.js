@@ -1,11 +1,9 @@
-const Express = require('express');
-const Rutas= Express.Router();
+const Express = require("express")
+const Rutas = Express.Router()
 
-const { RegistrarUsuarios } = require('../Controller/Login.Controller');
-const { IniciarSesion } = require('../Controller/Registro.controller');
+const { RegistrarUsuarios, IniciarSesion } = require("../Controller/Login.Controller")
 
-Rutas.post('/IniciarSesion', IniciarSesion);
+Rutas.post("/IniciarSesion", IniciarSesion)
+Rutas.post("/RegistrarUsuario", RegistrarUsuarios)
 
-Rutas.post('/RegistrarUsuario', RegistrarUsuarios);
-
-module.exports = Rutas; 
+module.exports = Rutas

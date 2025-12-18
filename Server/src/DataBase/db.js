@@ -41,7 +41,7 @@ const db_crear=new SQLite3.Database(SQLite3_Ubicacion, (error)=>{
             CREATE TABLE IF NOT EXISTS Asistencia (
                 id_asistencia INTEGER PRIMARY KEY AUTOINCREMENT,
                 fecha TEXT NOT NULL,
-                estado TEXT NOT NULL CHECK (estado IN ('Presente', 'Ausente', 'Tarde', 'Justificado')),
+                estado TEXT NOT NULL CHECK (estado IN ('Presente', 'Ausente', 'Justificado')),
                 notificacion TEXT,
                 id_usuario INTEGER NOT NULL,
                 id_alumno INTEGER NOT NULL,
