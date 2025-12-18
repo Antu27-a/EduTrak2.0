@@ -4,6 +4,9 @@ import { useEffect, useState } from "react"
 import api from "../../services/api"
 import "../../components/Css/Sidebar.css"
 
+import * as XLSX from "xlsx"
+import { saveAs } from "file-saver"
+
 import { Bar } from "react-chartjs-2"
 import {
   Chart as ChartJS,
@@ -14,7 +17,9 @@ import {
   Legend,
 } from "chart.js"
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend)
+import ChartDataLabels from "chartjs-plugin-datalabels"
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend, ChartDataLabels)
 
 
 export default function AdminDashboard() {
@@ -24,13 +29,21 @@ export default function AdminDashboard() {
     totalAlumnos: 0,
     asistenciasHoy: { porcentaje: 0 },
   })
+
+  const [alumnosPorCurso, setAlumnosPorCurso] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const cargarEstadisticas = async () => {
       try {
         const data = await api.getEstadisticas()
+
+        const cursos = await api.getEstadisticasCursos()
+
         setStats(data)
+
+        setAlumnosPorCurso(cursos)
+
       } catch (error) {
         console.error("Error al cargar estadísticas:", error)
       } finally {
@@ -47,6 +60,111 @@ export default function AdminDashboard() {
       </div>
     )
   }
+  const generarColor = index => {
+    const hue = (index * 360) / alumnosPorCurso.length
+    return `hsl(${hue}, 65%, 55%)`
+  }
+
+  const oscurecerHSL = index => {
+    const hue = (index * 360) / alumnosPorCurso.length
+    return `hsl(${hue}, 65%, 35%)`
+  }
+
+  const chartData = {
+    labels: alumnosPorCurso.map(item => item.curso),
+    datasets: [
+      {
+        label: "Alumnos",
+        data: alumnosPorCurso.map(item => Number(item.cantidad)),
+        backgroundColor: alumnosPorCurso.map((_, i) => generarColor(i)),
+        hoverBackgroundColor: alumnosPorCurso.map((_, i) => oscurecerHSL(i)),
+        borderRadius: 12,
+        maxBarThickness: 60,
+      },
+    ],
+  }
+
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    animation: {
+      duration: 1200,
+      easing: "easeOutQuart",
+    },
+    plugins: {
+      legend: {
+        display: false,
+      },
+      tooltip: {
+        backgroundColor: "#07454e",
+        titleColor: "#fff",
+        bodyColor: "#fff",
+        padding: 12,
+        cornerRadius: 8,
+      },
+      datalabels: {
+        color: "#07454e",
+        anchor: "end",
+        align: "end",
+        font: {
+          weight: "bold",
+          size: 14,
+        },
+        formatter: value => value,
+      },
+    },
+    scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+        ticks: {
+          color: "#555",
+          font: {
+            size: 13,
+          },
+        },
+      },
+      y: {
+        beginAtZero: true,
+        grid: {
+          color: "rgba(0,0,0,0.05)",
+        },
+        ticks: {
+          color: "#777",
+          stepSize: 5,
+        },
+      },
+    },
+  }
+
+  const exportarExcel = () => {
+    const datos = alumnosPorCurso.map(item => ({
+      Curso: item.curso,
+      "Cantidad de alumnos": item.cantidad,
+    }))
+
+    const worksheet = XLSX.utils.json_to_sheet(datos)
+    const workbook = XLSX.utils.book_new()
+
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Alumnos por curso")
+
+    const excelBuffer = XLSX.write(workbook, {
+      bookType: "xlsx",
+      type: "array",
+    })
+
+    const blob = new Blob([excelBuffer], {
+      type:
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    })
+
+    saveAs(blob, "alumnos_por_curso.xlsx")
+  }
+
+
+
+  console.log("Alumnos por curso:", alumnosPorCurso)
 
   return (
     <div className="admin-dashboard">
@@ -81,6 +199,47 @@ export default function AdminDashboard() {
           </div>
         ))}
       </div>
+
+      <div
+        style={{
+          marginTop: "40px",
+          background: "white",
+          padding: "28px",
+          borderRadius: "16px",
+          boxShadow: "0 6px 18px rgba(0,0,0,0.08)",
+        }}
+      >
+        <button
+          onClick={exportarExcel}
+          style={{
+            marginBottom: "16px",
+            padding: "10px 18px",
+            backgroundColor: "#07454e",
+            color: "white",
+            border: "none",
+            borderRadius: "8px",
+            cursor: "pointer",
+            fontWeight: "600",
+          }}
+        >
+          Exportar a Excel
+        </button>
+        <h2
+          style={{
+            fontSize: "22px",
+            fontWeight: "700",
+            color: "#07454e",
+            marginBottom: "20px",
+          }}
+        >
+          Alumnos por curso
+        </h2>
+
+        <div style={{ height: "340px" }}>
+          <Bar data={chartData} options={chartOptions} />
+        </div>
+      </div>
+
     </div>
   )
 }
